@@ -1,0 +1,15 @@
+# Lab 1: Requirements Table
+
+**Problem Statement #46 — Remote Team Time-Tracking & Project Approver**
+
+**Stakeholders / Actors:** Remote Developer, Engineering Manager
+
+| Req ID | Type | Description | Priority | Acceptance Criteria | Rationale |
+|--------|------|--------------|----------|----------------------|-----------|
+| FR-001 | Functional | The system shall allow developers to log time against specific project tasks and prevent timesheet submissions exceeding 24 hours in a single calendar day. | High | **Pass:** Valid timesheet submitted for manager approval.<br>**Fail:** Timesheet logging 30 hours in one day accepted. | Prevents fraudulent/erroneous logging and protects payroll integrity. |
+| FR-002 | Functional | The system shall allow a Remote Developer to link a logged time entry to an existing Jira ticket ID before submission. | High | **Pass:** Entry saved only when a valid, existing Jira ticket ID is attached.<br>**Fail:** Entry with a blank or non-existent ticket ID accepted. | Ensures hours are traceable to actual project work for accurate billing/reporting. |
+| FR-003 | Functional | The system shall allow an Engineering Manager to approve or reject a submitted timesheet, with a mandatory comment required on rejection. | High | **Pass:** Rejection blocked with an error if the comment field is empty.<br>**Fail:** Rejection succeeds with no comment. | Gives developers actionable feedback and creates an audit trail. |
+| FR-004 | Functional | The system shall automatically calculate and update the project's budget burn rate whenever a timesheet is approved. | Medium | **Pass:** Approving an 8-hour timesheet at the project rate increases burn rate by exactly hours × rate within one refresh cycle.<br>**Fail:** Burn rate unchanged or incorrect after approval. | Keeps budget tracking accurate in near real time for planning decisions. |
+| FR-005 | Functional | The system shall send a notification to the Engineering Manager when a project's budget burn rate exceeds 90% of the allocated budget. | Medium | **Pass:** Notification generated and delivered within 5 minutes of crossing 90%.<br>**Fail:** No notification sent, or sent at the wrong threshold. | Enables proactive intervention before budget overrun. |
+| NFR-001 | Nonfunctional (Performance & Security) | Timesheet approval status transitions and project budget burn charts must update across dashboards within 500 ms. | High | **Pass:** Benchmarking tests confirm target latency and security standards under simulated peak load.<br>**Fail:** Update latency exceeds 500 ms or fails security checks. | *(Given)* Ensures a responsive, trustworthy dashboard experience for managers. |
+| NFR-002 | Nonfunctional (Usability & Availability) | The system shall be available 99.5% of the time monthly and allow a Remote Developer to log a time entry in 3 clicks or fewer from the dashboard. | Medium | **Pass:** Uptime logs show ≥99.5% availability over 30 days AND usability testing confirms time-entry logging in ≤3 clicks.<br>**Fail:** Either condition is not met. | Distributed remote teams across time zones need reliable, low-friction access. |
